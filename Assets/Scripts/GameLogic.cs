@@ -15,6 +15,7 @@ public class GameLogic : MonoBehaviour
     public TMPro.TMP_Text timer;
     private string values;
     private (int result, List<int> loots) res;
+    private List<int> vals;
     private float currentTime;
     private float startTime;
     private bool isPaused = false;
@@ -28,7 +29,7 @@ public class GameLogic : MonoBehaviour
     {
         values = PlayerPrefs.GetString("Loot");
         List<string> ar = values.Split(',').ToList();
-        List<int> vals = new List<int>();
+        vals = new List<int>();
         foreach (var l in ar)
         {
 
@@ -246,7 +247,7 @@ public class GameLogic : MonoBehaviour
 
         caves[update].transform.Find("Cave-Coin").gameObject.GetComponent<TMPro.TMP_Text>().color = Color.green;
         caves[update].transform.Find("Cave-Btn").gameObject.SetActive(false);
-        coinBar.SetCoin(coinBar.GetCoin() + int.Parse(caves[update].transform.Find("Cave-Coin").gameObject.GetComponent<TMPro.TMP_Text>().text));
+        coinBar.SetCoin(coinBar.GetCoin() + vals[update]);
         coinMenu.transform.Find("coinText").gameObject.GetComponent<TMPro.TMP_Text>().text = coinBar.GetCoin().ToString() + "/" + coinBar.GetMaxCoin().ToString();
     }
 
